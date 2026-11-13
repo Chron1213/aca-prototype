@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ACA Hong Kong | Mobile Experience — Phone Preview</title>
+<meta name="description" content="Mobile experience preview of the Against Child Abuse Hong Kong website prototype, shown in iPhone frames." />
+<style>
+  :root{
+    --teal:#0F4C5C; --teal-dark:#09323D; --amber:#E36414; --crimson:#D90429;
+    --ink:#0B1220; --line:rgba(148,163,184,.18);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 600px at 50% -10%, #123445 0%, transparent 60%),
+      linear-gradient(180deg,#0B1220 0%, #0d1b26 100%);
+    color:#e2e8f0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;
+    padding:48px 20px 64px;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+    background-image:linear-gradient(var(--line) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+    -webkit-mask-image:radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
+  }
+  header{position:relative;max-width:1240px;margin:0 auto 40px;text-align:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:#7dd3c0;background:rgba(15,76,92,.55);border:1px solid rgba(125,211,192,.28);
+    padding:7px 14px;border-radius:999px;
+  }
+  h1{
+    font-size:clamp(24px,3.4vw,38px);line-height:1.15;margin:18px 0 10px;
+    font-weight:800;letter-spacing:-.02em;color:#fff;
+  }
+  h1 span{color:#f0a868}
+  p.sub{margin:0 auto;max-width:620px;font-size:15px;line-height:1.6;color:#94a3b8}
+  .live-link{
+    display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+    font-size:13px;font-weight:600;color:#cbd5e1;text-decoration:none;
+    border:1px solid rgba(148,163,184,.3);border-radius:10px;padding:9px 16px;
+    transition:.15s;
+  }
+  .live-link:hover{background:rgba(148,163,184,.12);color:#fff}
+
+  .grid{
+    position:relative;max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:44px;justify-items:center;align-items:start;
+  }
+  @media (max-width:1100px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px} }
+  @media (max-width:760px){ .grid{grid-template-columns:1fr;gap:34px} }
+
+  .device{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%}
+  .label{text-align:center}
+  .label .name{font-size:14px;font-weight:700;color:#fff;letter-spacing:.01em}
+  .label .path{
+    display:inline-block;margin-top:5px;font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    color:#7dd3c0;background:rgba(15,76,92,.5);border:1px solid rgba(125,211,192,.22);
+    padding:2px 8px;border-radius:6px;
+  }
+
+  /* ---- phone frame ---- */
+  .phone{
+    position:relative;width:390px;max-width:100%;
+    padding:13px;border-radius:56px;
+    background:linear-gradient(160deg,#2a3342 0%,#11161f 42%,#222b38 100%);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.09),
+      0 2px 3px rgba(0,0,0,.5),
+      0 30px 60px -12px rgba(0,0,0,.75),
+      0 60px 120px -30px rgba(0,0,0,.6);
+  }
+  /* side buttons */
+  .phone .btn-power{
+    position:absolute;right:-3px;top:186px;width:3px;height:88px;border-radius:2px;
+    background:linear-gradient(180deg,#4a5568,#20262f);
+  }
+  .phone .btn-vol{
+    position:absolute;left:-3px;top:150px;width:3px;height:56px;border-radius:2px;
+    background:linear-gradient(180deg,#4a5568,#20262f);
+  }
+  .phone .btn-vol2{
+    position:absolute;left:-3px;top:220px;width:3px;height:56px;border-radius:2px;
+    background:linear-gradient(180deg,#4a5568,#20262f);
+  }
+
+  .screen{
+    position:relative;width:100%;height:800px;border-radius:43px;overflow:hidden;
+    background:#fff;display:flex;flex-direction:column;
+  }
+  .statusbar{
+    flex:0 0 44px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 26px;background:var(--teal-dark);color:#fff;
+    font-size:13px;font-weight:700;letter-spacing:.01em;
+  }
+  .statusbar .right{display:flex;align-items:center;gap:6px;font-size:11px}
+  .bars{display:flex;align-items:flex-end;gap:2px;height:11px}
+  .bars i{display:block;width:3px;background:#fff;border-radius:1px}
+  .bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}
+  .bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:11px}
+  .batt{
+    width:22px;height:11px;border:1.4px solid #fff;border-radius:3px;position:relative;
+    display:inline-block;
+  }
+  .batt::after{content:"";position:absolute;inset:1.4px;right:5px;background:#fff;border-radius:1px}
+  .batt::before{content:"";position:absolute;right:-4px;top:3px;width:2px;height:5px;background:#fff;border-radius:1px}
+
+  .island{
+    position:absolute;top:9px;left:50%;transform:translateX(-50%);
+    width:104px;height:26px;border-radius:999px;background:#000;z-index:5;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .screen iframe{
+    flex:1 1 auto;width:100%;border:0;display:block;background:#FAF9F6;
+  }
+  footer{
+    position:relative;max-width:760px;margin:52px auto 0;text-align:center;
+    font-size:12px;line-height:1.7;color:#64748b;
+  }
+  footer code{color:#94a3b8}
+</style>
+</head>
+<body>
+
+  <header>
+    <span class="eyebrow">Mobile-first · 390 × 844</span>
+    <h1>Against Child Abuse <span>— Mobile Experience</span></h1>
+    <p class="sub">
+      Someone reaching out for help is holding a phone, not sitting at a desktop.
+      Every screen below is the real live site, rendered at true phone width — scroll or tap inside any device.
+    </p>
+    <a class="live-link" href="index.html" target="_top">
+      Open the live site full-screen →
+    </a>
+  </header>
+
+  <section class="grid">
+
+    <div class="device">
+      <div class="phone">
+        <div class="island"></div>
+        <div class="btn-power"></div>
+        <div class="btn-vol"></div>
+        <div class="btn-vol2"></div>
+        <div class="screen">
+          <div class="statusbar">
+            <span>9:41</span>
+            <span class="right">
+              <span class="bars"><i></i><i></i><i></i><i></i></span>
+              <span class="batt"></span>
+            </span>
+          </div>
+          <iframe src="embed.html#home" title="ACA mobile preview — Home" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="label">
+        <div class="name">Home</div>
+        <div class="path">#home</div>
+      </div>
+    </div>
+
+    <div class="device">
+      <div class="phone">
+        <div class="island"></div>
+        <div class="btn-power"></div>
+        <div class="btn-vol"></div>
+        <div class="btn-vol2"></div>
+        <div class="screen">
+          <div class="statusbar">
+            <span>9:41</span>
+            <span class="right">
+              <span class="bars"><i></i><i></i><i></i><i></i></span>
+              <span class="batt"></span>
+            </span>
+          </div>
+          <iframe src="embed.html#crisis" title="ACA mobile preview — Crisis Hotline" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="label">
+        <div class="name">Get Help Now</div>
+        <div class="path">#crisis</div>
+      </div>
+    </div>
+
+    <div class="device">
+      <div class="phone">
+        <div class="island"></div>
+        <div class="btn-power"></div>
+        <div class="btn-vol"></div>
+        <div class="btn-vol2"></div>
+        <div class="screen">
+          <div class="statusbar">
+            <span>9:41</span>
+            <span class="right">
+              <span class="bars"><i></i><i></i><i></i><i></i></span>
+              <span class="batt"></span>
+            </span>
+          </div>
+          <iframe src="embed.html#workshops" title="ACA mobile preview — Parents &amp; Schools" loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="label">
+        <div class="name">Parents &amp; Schools</div>
+        <div class="path">#workshops</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    Each frame loads the live single-page site at a 390px viewport, so what you see is the genuine responsive build —
+    <code>2755 1122</code> stays pinned to the top of every screen.
+  </footer>
+
+</body>
+</html>
