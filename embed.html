@@ -1040,6 +1040,7 @@ function switchView(name) {
 document.querySelectorAll('.view-section').forEach(function (s) { s.classList.add('hidden'); });
 var t = document.getElementById('view-' + name);
 if (t) t.classList.remove('hidden');
+try { history.replaceState(null, '', '#' + name); } catch (e) {}
 window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function applyHash() {
